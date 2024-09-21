@@ -1,19 +1,15 @@
 import bcryptjs from "bcryptjs";
-import { User } from "../models/user.models.js";
+import User from "../models/user.models.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
 
 export async function signup(req, res) {
   const { email, password, username } = req.body;
 
   try {
-    if (!email || !username || !password) {
-      throw new Error("All Feilds are required!");
-    }
-
     const userAlreadyExists = await User.findOne({ email });
 
     if (userAlreadyExists) {
-      throw new Error("Email is Already Taken");
+      return res.status(400).json({ message: "User already exists" });
     }
 
     const hashPassword = await bcryptjs.hash(password, 10);
@@ -35,6 +31,7 @@ export async function signup(req, res) {
         ...newUser._doc,
         password: undefined,
       },
+      role: newUser.role,
     });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
@@ -44,10 +41,6 @@ export async function signup(req, res) {
 export async function login(req, res) {
   const { email, password } = req.body;
   try {
-    if (!email || !password) {
-      throw new Error("All Feilds are required!");
-    }
-
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -74,6 +67,7 @@ export async function login(req, res) {
         ...user._doc,
         password: undefined,
       },
+      role: user.role,
     });
   } catch (error) {
     res.status(404).json({ success: false, message: error.message });
