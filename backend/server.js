@@ -4,6 +4,7 @@ import { connectToMongoDB } from "./db/connectToMongoDB.js";
 import cookieParser from "cookie-parser";
 import authRoutes from "./route/auth.route.js";
 import productRoutes from "./route/product.route.js";
+import cartRoutes from "./route/cart.route.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/products", productRoutes);
+app.use("/api/v1/cart", cartRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "MyStore Test API is Running" });
