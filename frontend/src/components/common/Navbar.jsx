@@ -12,7 +12,7 @@ import Logo from "../ui/Logo";
 const Navbar = () => {
   const user = false;
   // const { user, logout } = useUserStore();
-  const isAdmin = user?.role === "admin";
+  const isAdmin = false;
   // const { cart } = useCartStore();
   const cart = false;
   return (
@@ -24,13 +24,13 @@ const Navbar = () => {
           </Link>
 
           <nav className="flex flex-wrap items-center gap-4">
-            <Link
+            {/* <Link
               to={"/"}
               className="text-gray-300 hover:text-emerald-400 transition duration-300
 					 ease-in-out"
             >
               Home
-            </Link>
+            </Link> */}
             {user && (
               <Link
                 to={"/cart"}
@@ -65,26 +65,26 @@ const Navbar = () => {
 
             {user ? (
               <button
-                className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 
+                className="bg-gray-700 hover:bg-gray-600 text-white p-2 
 						rounded-md flex items-center transition duration-300 ease-in-out"
                 // onClick={logout}
               >
                 <RiLogoutCircleRLine size={18} />
-                <span className="hidden sm:inline ml-2">Log Out</span>
+                <span className="hidden sm:inline ml-2">Logout</span>
               </button>
             ) : (
               <>
                 <Link
-                  to={"/signup"}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 
+                  to={"/sign-up"}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white p-2 
 									rounded-md flex items-center transition duration-300 ease-in-out"
                 >
                   <RiUserAddLine className="mr-2" size={18} />
                   Sign Up
                 </Link>
                 <Link
-                  to={"/login"}
-                  className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 
+                  to={"/sign-in"}
+                  className="bg-gray-700 hover:bg-gray-600 text-white p-2 
 									rounded-md flex items-center transition duration-300 ease-in-out"
                 >
                   <RiLoginCircleLine className="mr-2" size={18} />

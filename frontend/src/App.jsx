@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import Navbar from "./components/common/Navbar";
 
 function App() {
+  const user = false;
   return (
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
       {/* Background gradient */}
@@ -15,7 +16,7 @@ function App() {
       </div>
 
       <div className="relative z-50 pt-20">
-        <Navbar />
+        {user && <Navbar />}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/sign-up" element={<SignupPage />} />
