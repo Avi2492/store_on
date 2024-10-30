@@ -5,12 +5,12 @@ import {
   RiArrowRightLine,
   RiFlashlightFill,
   RiLoaderLine,
-  RiLockPasswordLine,
-  RiMailAiLine,
+  // RiLockPasswordLine,
   RiUser2Line,
   RiUserAddLine,
 } from "@remixicon/react";
 import { Link } from "react-router-dom";
+import { useUserStore } from "../store/useUserStore";
 
 const SignupPage = () => {
   const loading = false;
@@ -21,9 +21,12 @@ const SignupPage = () => {
     confirmPassword: "",
   });
 
+  const { signup, user } = useUserStore();
+
   const handleSignup = (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    signup(formData);
   };
   return (
     <div className="flex flex-col justify-center py-2 sm:px-6 lg:px-6">
@@ -63,7 +66,6 @@ const SignupPage = () => {
               <CustomInput
                 label={"Email"}
                 placeholder={"Enter your email"}
-                icon={RiMailAiLine}
                 id={"email"}
                 type={"email"}
                 value={formData.email}
@@ -75,7 +77,6 @@ const SignupPage = () => {
               <CustomInput
                 label={"Password"}
                 placeholder={"Enter your password"}
-                icon={RiLockPasswordLine}
                 id={"password"}
                 type={"password"}
                 value={formData.password}
@@ -87,7 +88,6 @@ const SignupPage = () => {
               <CustomInput
                 label={"Confirm Password"}
                 placeholder={"Confirm your password"}
-                icon={RiLockPasswordLine}
                 id={"password"}
                 type={"password"}
                 value={formData.confirmPassword}

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { ENV_VARS } from "../config/envVars.js";
 
-export const generateAccessTokenAndSetCookie = (res, userId) => {
+const generateAccessTokenAndSetCookie = (res, userId) => {
   const accessToken = jwt.sign({ userId }, ENV_VARS.ACCESS_TOKEN_SECRET, {
     expiresIn: "15m",
   });
@@ -14,7 +14,7 @@ export const generateAccessTokenAndSetCookie = (res, userId) => {
   return accessToken;
 };
 
-export const generateRefreshTokenAndSetCookie = (res, userId) => {
+const generateRefreshTokenAndSetCookie = (res, userId) => {
   const refreshToken = jwt.sign({ userId }, ENV_VARS.REFRESH_TOKEN_SECRET, {
     expiresIn: "7d",
   });
@@ -26,3 +26,5 @@ export const generateRefreshTokenAndSetCookie = (res, userId) => {
   });
   return refreshToken;
 };
+
+export { generateAccessTokenAndSetCookie, generateRefreshTokenAndSetCookie };
