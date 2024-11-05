@@ -10,7 +10,8 @@ import {
   RiUserAddLine,
 } from "@remixicon/react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUserStore } from "../store/useUserStore";
 
 const LoginPage = () => {
   const loading = false;
@@ -19,10 +20,18 @@ const LoginPage = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
+
+  const {login} = useUserStore();
+
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(formData);
+    
+    login(formData);
+
+    navigate("/home");
   };
+
   return (
     <div className="flex flex-col justify-center py-2 sm:px-6 lg:px-6">
       <motion.div

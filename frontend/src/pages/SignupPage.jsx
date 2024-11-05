@@ -5,29 +5,34 @@ import {
   RiArrowRightLine,
   RiFlashlightFill,
   RiLoaderLine,
-  // RiLockPasswordLine,
   RiUser2Line,
   RiUserAddLine,
 } from "@remixicon/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../store/useUserStore";
+import toast from "react-hot-toast";
 
 const SignupPage = () => {
   const loading = false;
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  const { signup, user } = useUserStore();
+  const navigate = useNavigate()
+
+  const { signup } = useUserStore();
 
   const handleSignup = (e) => {
     e.preventDefault();
 
     signup(formData);
+
+    navigate("/sign-in");
   };
+
   return (
     <div className="flex flex-col justify-center py-2 sm:px-6 lg:px-6">
       <motion.div
@@ -57,9 +62,9 @@ const SignupPage = () => {
                 icon={RiUser2Line}
                 id={"name"}
                 type={"text"}
-                value={formData.name}
+                value={formData.username}
                 onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
+                  setFormData({ ...formData, username: e.target.value })
                 }
               />
 
