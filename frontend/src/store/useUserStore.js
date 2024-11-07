@@ -35,7 +35,6 @@ export const useUserStore = create((set, get) => ({
 
 	login: async ({ email, password }) => {
 		set({ loading: true });
-
 		try {
 			const response = await axiosInstance.post("auth/login", {
 				email,

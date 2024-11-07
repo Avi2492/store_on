@@ -4,9 +4,11 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import Navbar from "./components/common/Navbar";
 import { Toaster } from "react-hot-toast";
+import MarketingPage from "./pages/MarketingPage";
+import { useUserStore } from "./store/useUserStore";
 
 function App() {
-  const user = false;
+  const {user} = useUserStore()
   return (
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
       {/* Background gradient */}
@@ -17,8 +19,9 @@ function App() {
       </div>
 
       <div className="relative z-50 pt-20">
-        {!user && <Navbar />}
+        {user && <Navbar />}
         <Routes>
+          <Route path="/" element={<MarketingPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/sign-up" element={<SignupPage />} />
           <Route path="/sign-in" element={<LoginPage />} />
