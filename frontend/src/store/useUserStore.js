@@ -1,6 +1,9 @@
+/* eslint-disable no-empty */
+/* eslint-disable no-unused-vars */
 import { create } from "zustand";
 import { toast } from "react-hot-toast";
 import axiosInstance from "../lib/axios.js";
+import axios from "axios";
 
 export const useUserStore = create((set, get) => ({
 	user: null,
@@ -55,9 +58,21 @@ export const useUserStore = create((set, get) => ({
 			await axiosInstance.post("auth/logout");
 			set({ user: null });
 
-      toast.success("Logout Success");
+			toast.success("Logout Success");
 		} catch (error) {
-			toast.error(error.response?.data?.message || "An error occurred during logout");
+			toast.error(
+				error.response?.data?.message || "An error occurred during logout",
+			);
+		}
+	},
+
+	checkAuth: async (params) => {
+		set({ checkingAuth: true });
+		try {
+			const response = await axiosInstance.get("auth/getme");
+			set({ user: response.data, checkingAuth: false });
+		} catch (error) {
+			set({ user: null, checkingAuth: false });
 		}
 	},
 }));

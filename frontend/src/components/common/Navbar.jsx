@@ -11,7 +11,7 @@ import { useUserStore } from "../../store/useUserStore";
 
 const Navbar = () => {
 	const { user, logout } = useUserStore();
-	const isAdmin = false;
+	const isAdmin = user?.role === "admin";
 	// const { cart } = useCartStore();
 	const cart = false;
 	return (
@@ -32,7 +32,7 @@ const Navbar = () => {
 						{user && (
 							<Link
 								to={"/cart"}
-								className="relative group text-gray-300 hover:text-emerald-400 transition duration-300 
+								className="relative group text-gray-300 hover:text-emerald-400 transition duration-300
 							ease-in-out">
 								<RiShoppingBagLine
 									className="inline-block mr-1 group-hover:text-emerald-400"
@@ -41,7 +41,7 @@ const Navbar = () => {
 								<span className="hidden sm:inline">Cart</span>
 								{cart.length > 0 && (
 									<span
-										className="absolute -top-2 -left-2 bg-emerald-500 text-white rounded-full px-2 py-0.5 
+										className="absolute -top-2 -left-2 bg-emerald-500 text-white rounded-full px-2 py-0.5
 									text-xs group-hover:bg-emerald-400 transition duration-300 ease-in-out">
 										{cart.length}
 									</span>
@@ -63,7 +63,7 @@ const Navbar = () => {
 
 						{user ? (
 							<button
-								className="bg-gray-700 hover:bg-gray-600 text-white p-2 
+								className="bg-gray-700 hover:bg-gray-600 text-white p-2
 						rounded-md flex items-center transition duration-300 ease-in-out"
 								onClick={logout}>
 								<RiLogoutCircleRLine size={18} />
@@ -73,7 +73,7 @@ const Navbar = () => {
 							<>
 								<Link
 									to={"/sign-up"}
-									className="bg-emerald-600 hover:bg-emerald-700 text-white p-2 
+									className="bg-emerald-600 hover:bg-emerald-700 text-white p-2
 									rounded-md flex items-center transition duration-300 ease-in-out">
 									<RiUserAddLine
 										className="mr-2"
@@ -83,7 +83,7 @@ const Navbar = () => {
 								</Link>
 								<Link
 									to={"/sign-in"}
-									className="bg-gray-700 hover:bg-gray-600 text-white p-2 
+									className="bg-gray-700 hover:bg-gray-600 text-white p-2
 									rounded-md flex items-center transition duration-300 ease-in-out">
 									<RiLoginCircleLine
 										className="mr-2"
