@@ -1,6 +1,10 @@
 import Redis from "ioredis";
 
-import { ENV_VARS } from "../config/envVars";
+import dotenv from "dotenv";
 
-export const redis = new Redis(ENV_VARS.REDDIS_URL);
+dotenv.config();
+
+export const redis = new Redis(process.env.UPSTASH_REDDIS_URL);
+
+// key-value store
 // await redis.set("foo", "bar");
